@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUpActivity">
+    tools:context=".obb.SignUpActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -44,7 +44,7 @@
             app:layout_constraintTop_toBottomOf="@+id/no_value2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
+    <EditText
         android:id="@+id/input_name_signup"
         android:layout_width="300dp"
         android:layout_height="60dp"
@@ -62,7 +62,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
-    <TextView
+    <EditText
         android:id="@+id/input_email_singup"
         android:layout_width="300dp"
         android:layout_height="60dp"
@@ -81,7 +81,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/input_name_signup" />
 
-    <TextView
+    <EditText
         android:id="@+id/input_password_singup"
         android:layout_width="300dp"
         android:layout_height="60dp"
@@ -100,7 +100,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/input_email_singup" />
 
-    <TextView
+    <EditText
         android:id="@+id/input_retype_signup"
         android:layout_width="300dp"
         android:layout_height="60dp"
@@ -138,6 +138,7 @@
         android:layout_marginTop="15dp"
         android:backgroundTint="@color/primaryColor"
         android:text="Sign Up"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBox" />

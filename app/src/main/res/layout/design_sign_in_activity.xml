@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignInActivity"
+    tools:context=".obb.SignInActivity"
     android:background="@drawable/gradient_background">
 
     <ImageView
@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_primary" />
 
-    <TextView
+    <EditText
         android:id="@+id/input_email_login"
         android:layout_width="300dp"
         android:layout_height="60dp"
@@ -46,7 +46,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ic_logo" />
 
-    <TextView
+    <EditText
         android:id="@+id/input_password_login"
         android:layout_width="300dp"
         android:layout_height="60dp"
@@ -66,7 +66,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="270dp"
         android:layout_marginTop="50dp"
         android:background="@drawable/custom_login"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -91,6 +91,7 @@
             android:layout_marginTop="16dp"
             android:backgroundTint="@color/primaryColor"
             android:text="Login"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button_forgot_login" />
@@ -117,4 +118,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/no_value" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

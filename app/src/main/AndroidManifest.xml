@@ -13,27 +13,33 @@
         android:theme="@style/Theme.Practice"
         tools:targetApi="31">
         <activity
-            android:name=".ForgotActivity"
+            android:name=".obb.CartActivity"
             android:exported="false" />
         <activity
-            android:name=".SignUpActivity"
+            android:name=".obb.CategoryActivity"
             android:exported="false" />
         <activity
-            android:name=".SignInActivity"
+            android:name=".obb.HomePageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".obb.ForgotActivity"
+            android:exported="false" />
+        <activity
+            android:name=".obb.SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".obb.SignInActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Base.Theme.Practice">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
