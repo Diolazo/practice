@@ -2,6 +2,7 @@ package com.example.practice.obb
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.practice.databinding.DesignSignInActivityBinding
 
@@ -19,6 +20,7 @@ class SignInActivity : AppCompatActivity() {
 
         binding.btnLogin.setOnClickListener {
             //loginUser()
+            Toast.makeText(this, "Logging in", Toast.LENGTH_SHORT).show()
         }
 
         binding.btnCreateAccount.setOnClickListener {
