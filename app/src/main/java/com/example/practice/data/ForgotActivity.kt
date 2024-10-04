@@ -1,4 +1,4 @@
-package com.example.practice.obb
+package com.example.practice.data
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

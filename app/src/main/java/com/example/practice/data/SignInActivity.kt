@@ -1,10 +1,11 @@
-package com.example.practice.obb
+package com.example.practice.data
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.practice.databinding.DesignSignInActivityBinding
+import com.example.practice.data.HomePageActivity
 
 class SignInActivity : AppCompatActivity() {
     private lateinit var binding: DesignSignInActivityBinding
@@ -19,8 +20,9 @@ class SignInActivity : AppCompatActivity() {
         }
 
         binding.btnLogin.setOnClickListener {
+            startActivity(Intent(this, HomePageActivity::class.java))
             //loginUser()
-            Toast.makeText(this, "Logging in", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this, "Logging in", Toast.LENGTH_SHORT).show()
         }
 
         binding.btnCreateAccount.setOnClickListener {

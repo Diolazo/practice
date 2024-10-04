@@ -1,4 +1,4 @@
-package com.example.practice.obb
+package com.example.practice.data
 
 import android.content.Intent
 import android.os.Bundle

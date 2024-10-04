@@ -13,22 +13,19 @@
         android:theme="@style/Theme.Practice"
         tools:targetApi="31">
         <activity
-            android:name=".obb.CartActivity"
+            android:name=".data.CartActivity"
             android:exported="false" />
         <activity
-            android:name=".obb.CategoryActivity"
+            android:name=".data.HomePageActivity"
             android:exported="false" />
         <activity
-            android:name=".obb.HomePageActivity"
+            android:name=".data.ForgotActivity"
             android:exported="false" />
         <activity
-            android:name=".obb.ForgotActivity"
+            android:name=".data.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".obb.SignUpActivity"
-            android:exported="false" />
-        <activity
-            android:name=".obb.SignInActivity"
+            android:name=".data.SignInActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
