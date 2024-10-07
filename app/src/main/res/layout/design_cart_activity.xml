@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".data.CartActivity">
+    tools:context=".data.CartActivity"
+    android:background="@color/white">
 
 </androidx.constraintlayout.widget.ConstraintLayout>
