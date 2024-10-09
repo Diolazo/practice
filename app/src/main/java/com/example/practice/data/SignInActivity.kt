@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.practice.data.adminpanel.AdminDashboard
 import com.example.practice.databinding.DesignSignInActivityBinding
 import com.example.practice.data.files.DatabaseHelper
 import com.example.practice.data.files.ValidationUtils
@@ -41,8 +42,11 @@ class SignInActivity : AppCompatActivity() {
             if (ValidationUtils.isValidEmail(email)) {
                 val isSuccess = db.loginUser(email, password)
                 if (isSuccess) {
-                    startActivity(Intent(this, HomePageActivity::class.java))
-                    finish()
+                    if (email == "admin@gmail.com"){
+                        startActivity(Intent(this, AdminDashboard::class.java))
+                    }else{
+                        startActivity(Intent(this, HomePageActivity::class.java))
+                    }
                 }
             } else {
                 Toast.makeText(this,"Invalid format email", Toast.LENGTH_SHORT).show()

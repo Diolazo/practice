@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import org.mindrot.jbcrypt.BCrypt
 
 class DatabaseHelper(context:Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
@@ -18,11 +19,28 @@ class DatabaseHelper(context:Context) : SQLiteOpenHelper(context, DATABASE_NAME,
 
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL(CREATE_TABLE_USER)
+        insertDefaultAdmin(db)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db?.execSQL(DROP_TABLE_USER)
         onCreate(db)
+    }
+
+    private fun insertDefaultAdmin(db: SQLiteDatabase?){
+        var cursor = db?.query(TABLE_USER, null,"$COL_USER_EMAIL = ?", arrayOf("admin@gmail.com"), null, null, null)
+
+        if (cursor?.count == 0){
+            val values = ContentValues()
+            values.put(COL_USER_NAME, "Admin")
+            values.put(COL_USER_EMAIL, "admin@gmail.com")
+            val defaultPassword = "admin123"
+            values.put(COL_USER_PASSWORD, BCrypt.hashpw(defaultPassword, BCrypt.gensalt()))
+            values.put(COL_USER_CONFIRM, defaultPassword)
+
+            db?.insert(TABLE_USER, null, values)
+        }
+        cursor?.close()
     }
 
     fun registerUser(user : Users) {

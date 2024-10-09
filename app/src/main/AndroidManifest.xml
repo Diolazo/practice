@@ -13,6 +13,18 @@
         android:theme="@style/Theme.Practice"
         tools:targetApi="31">
         <activity
+            android:name=".data.adminpanel.AdminListUser"
+            android:exported="false" />
+        <activity
+            android:name=".data.adminpanel.AdminListProduct"
+            android:exported="false" />
+        <activity
+            android:name=".data.adminpanel.AdminCreate"
+            android:exported="false" />
+        <activity
+            android:name=".data.adminpanel.AdminDashboard"
+            android:exported="false" />
+        <activity
             android:name=".data.CartActivity"
             android:exported="false" />
         <activity
