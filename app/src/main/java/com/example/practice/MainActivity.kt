@@ -11,17 +11,15 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        Thread.sleep(2000)
-        installSplashScreen()
+
 
         val delayMillis = 2000L
-        val intent = Intent(this, SignInActivity::class.java)
-
         android.os.Handler().postDelayed({
-            startActivity(intent)
+            startActivity(Intent(this, SignInActivity::class.java))
             finish()
         }, delayMillis)
 

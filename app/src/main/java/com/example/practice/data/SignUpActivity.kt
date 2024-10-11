@@ -2,6 +2,7 @@ package com.example.practice.data
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.practice.data.files.DatabaseHelper
@@ -30,10 +31,10 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun registerUser() {
-        val name = binding.inputNameSignup.text.toString()
-        val email = binding.inputEmailSingup.text.toString()
-        val password = binding.inputPasswordSingup.text.toString()
-        val confirm = binding.inputRetypeSignup.text.toString()
+        val name = binding.inputNameSignup.text.toString().trim()
+        val email = binding.inputEmailSingup.text.toString().trim()
+        val password = binding.inputPasswordSingup.text.toString().trim()
+        val confirm = binding.inputRetypeSignup.text.toString().trim()
 
         if (ValidationUtils.isTextNotEmpty(name) &&
             ValidationUtils.isTextNotEmpty(email) &&
@@ -42,9 +43,21 @@ class SignUpActivity : AppCompatActivity() {
         ) {
             if (ValidationUtils.isValidEmail(email)) {
                 if (password == confirm) {
-                    val user = Users(name = name, email = email.trim(), password = password, confirmPassword = confirm)
-                    db.registerUser(user)
-                    Toast.makeText(this, "User Registered", Toast.LENGTH_SHORT).show()
+                    try {
+                        val userExists = db.checkUserExists(email)
+
+                        if (userExists) {
+                            Toast.makeText(this, "This email is already registered", Toast.LENGTH_SHORT).show()
+                        } else {
+                            val user = Users(name = name, email = email, password = password, confirmPassword = confirm)
+                            db.registerUser(user)
+                            Toast.makeText(this, "User Registered", Toast.LENGTH_SHORT).show()
+                            startActivity(Intent(this, SignInActivity::class.java))
+                        }
+                    } catch (e: Exception) {
+                        Log.e("SignUpActivity", "Error registering user", e)
+                        Toast.makeText(this, "An error occurred. Please try again.", Toast.LENGTH_SHORT).show()
+                    }
                 } else {
                     Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
                 }

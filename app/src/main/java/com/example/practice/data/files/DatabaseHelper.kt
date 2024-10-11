@@ -6,12 +6,12 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import org.mindrot.jbcrypt.BCrypt
 
-class DatabaseHelper(context:Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     private val CREATE_TABLE_USER = "CREATE TABLE $TABLE_USER (" +
             "$COL_USER_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "$COL_USER_NAME TEXT," +
-            "$COL_USER_EMAIL TEXT UNIQUE," +  // Added UNIQUE constraint
+            "$COL_USER_EMAIL TEXT UNIQUE," +
             "$COL_USER_PASSWORD TEXT," +
             "$COL_USER_CONFIRM TEXT)"
 
@@ -27,13 +27,13 @@ class DatabaseHelper(context:Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         onCreate(db)
     }
 
-    private fun insertDefaultAdmin(db: SQLiteDatabase?){
-        var cursor = db?.query(TABLE_USER, null,"$COL_USER_EMAIL = ?", arrayOf("admin@gmail.com"), null, null, null)
+    private fun insertDefaultAdmin(db: SQLiteDatabase?) {
+        val cursor = db?.query(TABLE_USER, null, "$COL_USER_EMAIL = ?", arrayOf("admin4@gmail.com"), null, null, null)
 
-        if (cursor?.count == 0){
+        if (cursor?.count == 0) {
             val values = ContentValues()
-            values.put(COL_USER_NAME, "Admin")
-            values.put(COL_USER_EMAIL, "admin@gmail.com")
+            values.put(COL_USER_NAME, "Admin Four")
+            values.put(COL_USER_EMAIL, "admin4@gmail.com")
             val defaultPassword = "admin123"
             values.put(COL_USER_PASSWORD, BCrypt.hashpw(defaultPassword, BCrypt.gensalt()))
             values.put(COL_USER_CONFIRM, defaultPassword)
@@ -43,34 +43,49 @@ class DatabaseHelper(context:Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         cursor?.close()
     }
 
-    fun registerUser(user : Users) {
+    fun registerUser(user: Users): Long {
         val db = this.writableDatabase
-        val value = ContentValues()
-        value.put(COL_USER_NAME, user.name)
-        value.put(COL_USER_EMAIL, user.email)
-        value.put(COL_USER_PASSWORD, user.password)
-        value.put(COL_USER_CONFIRM, user.confirmPassword)
+        if (checkUserExists(user.email)) {
+            throw Exception("User already exists")
+        }
 
-        try {
-            db.insert(TABLE_USER, null, value)
+        val values = ContentValues()
+        values.put(COL_USER_NAME, user.name)
+        values.put(COL_USER_EMAIL, user.email)
+        values.put(COL_USER_PASSWORD, user.password)
+        values.put(COL_USER_CONFIRM, user.confirmPassword)
+
+        return try {
+            db.insert(TABLE_USER, null, values)
         } catch (e: Exception) {
             e.printStackTrace()
+            -1
         } finally {
             db.close()
+        }
+    }
+
+    fun checkUserExists(email: String): Boolean {
+        val db = this.readableDatabase
+        val query = "SELECT * FROM $TABLE_USER WHERE $COL_USER_EMAIL = ?"
+        val cursor = db.rawQuery(query, arrayOf(email))
+
+        return try {
+            cursor.moveToFirst()
+        } finally {
+            cursor.close()
         }
     }
 
     fun loginUser(email: String, password: String): Boolean {
         val columns = arrayOf(COL_USER_ID)
         val db = this.readableDatabase
-        val selection = "$COL_USER_EMAIL = ? AND $COL_USER_PASSWORD = ?"
-        val selectionArgs = arrayOf(email, password)
-
+        val selection = "$COL_USER_EMAIL = ?"
         val cursor = db.query(
             TABLE_USER,
             columns,
             selection,
-            selectionArgs,
+            arrayOf(email),
             null,
             null,
             null,
@@ -78,8 +93,6 @@ class DatabaseHelper(context:Context) : SQLiteOpenHelper(context, DATABASE_NAME,
 
         val cursorCount = cursor.count
         cursor.close()
-        db.close()
-
         return cursorCount > 0
     }
 
