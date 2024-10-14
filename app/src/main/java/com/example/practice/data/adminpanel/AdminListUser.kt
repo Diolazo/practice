@@ -6,16 +6,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.practice.R
+import com.example.practice.databinding.DesignAdminListUserBinding
 
 class AdminListUser : AppCompatActivity() {
+    private lateinit var binding: DesignAdminListUserBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.design_admin_list_user)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+        binding = DesignAdminListUserBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+
+
     }
 }
