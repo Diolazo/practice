@@ -65,6 +65,30 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         }
     }
 
+    fun getAllUsers(): List<Users>{
+        val userList = mutableListOf<Users>()
+        val db = this.readableDatabase
+        val query = "SELECT * FROM $TABLE_USER"
+        val cursor = db.rawQuery(query,null)
+
+        if (cursor.moveToFirst()){
+            do{
+                val id = cursor.getInt(cursor.getColumnIndexOrThrow(COL_USER_ID))
+                val name = cursor.getString(cursor.getColumnIndexOrThrow(COL_USER_NAME))
+                val email = cursor.getString(cursor.getColumnIndexOrThrow(COL_USER_EMAIL))
+                val password = cursor.getString(cursor.getColumnIndexOrThrow(COL_USER_PASSWORD))
+                val confirmPassword = cursor.getString(cursor.getColumnIndexOrThrow(COL_USER_CONFIRM))
+
+
+                val user = Users(id, name, email, password, confirmPassword)
+                userList.add(user)
+            }while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+        return userList
+    }
+
     fun checkUserExists(email: String): Boolean {
         val db = this.readableDatabase
         val query = "SELECT * FROM $TABLE_USER WHERE $COL_USER_EMAIL = ?"
