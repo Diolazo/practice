@@ -2,8 +2,10 @@ package com.example.practice.data.files
 
 import android.content.ContentValues
 import android.content.Context
+import android.content.LocusId
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 import org.mindrot.jbcrypt.BCrypt
 
 class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
@@ -65,6 +67,11 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         }
     }
 
+    fun deleteUser(userId: Int): Int{
+        val db = this.writableDatabase
+        return db.delete(TABLE_USER, "$COL_USER_ID = ?", arrayOf(userId.toString()))
+    }
+
     fun getAllUsers(): List<Users>{
         val userList = mutableListOf<Users>()
         val db = this.readableDatabase
@@ -86,6 +93,10 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         }
         cursor.close()
         db.close()
+        return userList
+
+
+        Log.d("Database", "Fetched users: $userList")
         return userList
     }
 

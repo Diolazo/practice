@@ -5,7 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -14,6 +18,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.practice.R
 import com.example.practice.databinding.BottomNavigationBinding
 import com.example.practice.databinding.DesignHomePageActivityBinding
+import com.example.practice.databinding.DesignSignInActivityBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomePageActivity : AppCompatActivity() {

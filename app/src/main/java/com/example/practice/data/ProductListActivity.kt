@@ -2,6 +2,7 @@ package com.example.practice.data
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
@@ -22,6 +23,12 @@ class ProductListActivity : AppCompatActivity() {
             val intent = Intent(this, CheckActivity::class.java)
             startActivity(intent)
 
+        }
+    }
+
+    companion object {
+        fun inflate(layoutInflater: LayoutInflater): ProductListActivity {
+            TODO("Not yet implemented")
         }
     }
 }
