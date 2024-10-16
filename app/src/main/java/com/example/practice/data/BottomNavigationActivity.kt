@@ -1,22 +1,17 @@
 package com.example.practice.data
 
-import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.widget.FrameLayout
-import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
 import com.example.practice.R
 import com.example.practice.databinding.BottomNavigationBinding
-import com.example.practice.databinding.DesignHomePageActivityBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class HomePageActivity : AppCompatActivity() {
+class BottomNavigationActivity : AppCompatActivity() {
 
     private lateinit var binding: BottomNavigationBinding
     private lateinit var homeFragment: HomeFragment
@@ -25,8 +20,6 @@ class HomePageActivity : AppCompatActivity() {
     private var doubleBackToExitPressOnce = false
 
 
-
-    @SuppressLint("MissingInflatedId", "WrongViewCast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -73,12 +66,6 @@ class HomePageActivity : AppCompatActivity() {
             true
         }
     }
-
-
-
-
-
-
 
     override fun onBackPressed() {
         if (doubleBackToExitPressOnce) {
