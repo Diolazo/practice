@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.practice.data.files.DatabaseHelper
+import androidx.appcompat.app.AlertDialog
 import com.example.practice.data.files.Product
 import com.example.practice.databinding.DesignAdminListProductBinding
 
@@ -39,17 +40,31 @@ class AdminListProduct : AppCompatActivity() {
     }
 
     private fun deleteProduct(product: Product) {
-        val result = databaseHelper.deleteProduct(product.id)
-        if (result > 0) {
-            Toast.makeText(this, "${product.title} deleted", Toast.LENGTH_SHORT).show()
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Confirm Deletion")
+        builder.setMessage("Are you sure you want to delete ${product.title}?")
 
-            productList = databaseHelper.getAllProducts()
-            productAdapter = ProductAdapter(productList) { product ->
-                deleteProduct(product)
+        builder.setPositiveButton("Yes") { dialog, which ->
+            val result = databaseHelper.deleteProduct(product.id)
+            if (result > 0) {
+                Toast.makeText(this, "${product.title} deleted", Toast.LENGTH_SHORT).show()
+                refreshProductList()
+            } else {
+                Toast.makeText(this, "Failed to delete ${product.title}", Toast.LENGTH_SHORT).show()
             }
-            binding.recyclerViewProduct.adapter = productAdapter
-        } else {
-            Toast.makeText(this, "Failed to delete ${product.title}", Toast.LENGTH_SHORT).show()
         }
+
+        builder.setNegativeButton("No") { dialog, which ->
+            dialog.dismiss()
+        }
+        builder.show()
+    }
+
+    private fun refreshProductList() {
+        productList = databaseHelper.getAllProducts()
+        productAdapter = ProductAdapter(productList) { product ->
+            deleteProduct(product)
+        }
+        binding.recyclerViewProduct.adapter = productAdapter
     }
 }
