@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.practice.data.files.Users
 import com.example.practice.databinding.AdminListUsersBinding
-import com.example.practice.databinding.DesignAdminListUserBinding
 
 class UserAdapter (private val userList: List<Users>,private val onDeleteClick: (Users) -> Unit): RecyclerView.Adapter<UserAdapter.UserViewHolder>(){
 
