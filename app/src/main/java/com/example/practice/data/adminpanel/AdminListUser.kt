@@ -75,7 +75,7 @@ class AdminListUser : AppCompatActivity() {
             userAdapter = UserAdapter(userList) { user ->
                 deleteUser(user)
             }
-            binding.recyclerViewUser.adapter = userAdapter // Refresh the adapter
+            binding.recyclerViewUser.adapter = userAdapter
         } else {
             Toast.makeText(this, "Failed to delete ${user.name}", Toast.LENGTH_SHORT).show()
         }
