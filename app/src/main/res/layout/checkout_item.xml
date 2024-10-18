@@ -21,16 +21,17 @@
             android:layout_height="30dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="180dp"
-            app:layout_constraintEnd_toEndOf="@id/tv_admin"
+            app:layout_constraintEnd_toEndOf="@id/tv_go_back"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="NotSibling">
 
             <ImageView
                 android:id="@+id/go_back"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginEnd="90dp"
-                android:background="@drawable/arrow_back"
+                android:background="@drawable/ic_arrow_back"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

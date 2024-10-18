@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.practice.R
 import com.example.practice.databinding.FragmentSettingsBinding
 
 class SettingsFragment : Fragment() {
@@ -25,11 +24,11 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnLogout.setOnClickListener {
+        binding.btnSetLogOut.setOnClickListener {
             logoutUser()
         }
 
-        binding.tvAbout.setOnClickListener{
+        binding.btnSetAbout.setOnClickListener{
             val intent = Intent(requireActivity(), AboutActivity::class.java)
             startActivity(intent)
         }

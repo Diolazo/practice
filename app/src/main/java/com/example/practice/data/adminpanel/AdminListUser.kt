@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import android.Manifest
 import android.content.ContentValues
 import android.provider.MediaStore
+import androidx.appcompat.app.AlertDialog
 import com.example.practice.data.files.DatabaseHelper
 import com.example.practice.data.files.Users
 import com.example.practice.databinding.DesignAdminListUserBinding
@@ -67,18 +68,31 @@ class AdminListUser : AppCompatActivity() {
     }
 
     private fun deleteUser(user: Users) {
-        val result = databaseHelper.deleteUser(user.id)
-        if (result > 0) {
-            Toast.makeText(this, "${user.name} deleted", Toast.LENGTH_SHORT).show()
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Confirm Deletion")
+        builder.setMessage("Are you sure you want to delete ${user.name}?")
 
-            userList = databaseHelper.getAllUsers()
-            userAdapter = UserAdapter(userList) { user ->
-                deleteUser(user)
+        builder.setPositiveButton("Yes") { dialog, which ->
+            val result = databaseHelper.deleteUser(user.id)
+            if (result > 0) {
+                Toast.makeText(this, "${user.name} deleted", Toast.LENGTH_SHORT).show()
+                refreshUserList()
+            } else {
+                Toast.makeText(this, "Failed to delete ${user.name}", Toast.LENGTH_SHORT).show()
             }
-            binding.recyclerViewUser.adapter = userAdapter // Refresh the adapter
-        } else {
-            Toast.makeText(this, "Failed to delete ${user.name}", Toast.LENGTH_SHORT).show()
         }
+        builder.setNegativeButton("No") { dialog, which ->
+            dialog.dismiss()
+        }
+        builder.show()
+    }
+
+    private fun refreshUserList(){
+        userList = databaseHelper.getAllUsers()
+        userAdapter = UserAdapter(userList){user ->
+            deleteUser(user)
+        }
+        binding.recyclerViewUser.adapter = userAdapter
     }
 
     private fun exportToCSV() {

@@ -1,19 +1,23 @@
 package com.example.practice.data.adminpanel
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
 import com.example.practice.R
+import com.example.practice.data.files.DatabaseHelper
+import com.example.practice.data.files.Product
 import com.example.practice.databinding.DesignAdminCreateBinding
 
 class AdminCreate : AppCompatActivity() {
@@ -40,41 +44,65 @@ class AdminCreate : AppCompatActivity() {
         binding.btnAdminBack.setOnClickListener {
             startActivity(Intent(this, AdminDashboard::class.java))
         }
-
     }
+
     private fun chooseImage() {
-        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        startActivityForResult(intent, 100)
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+            != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 101)
+        } else {
+            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            startActivityForResult(intent, 100)
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 101) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                chooseImage()
+            } else {
+                Toast.makeText(this, "Permission denied to read your External storage", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == 100 && resultCode == Activity.RESULT_OK){
+        if (requestCode == 100 && resultCode == Activity.RESULT_OK) {
             selectedImageUri = data?.data
-            val bitmap: Bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, selectedImageUri)
-            binding.imgProduct.setImageBitmap(bitmap)
+            if (selectedImageUri != null) {
+                Glide.with(this)
+                    .load(selectedImageUri)
+                    .into(binding.imgProduct)
+            } else {
+                Toast.makeText(this, "Error: Unable to select image", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
-    private fun addProduct(){
+    private fun addProduct() {
         val title = binding.etTitle.text.toString().trim()
         val category = binding.spinnerCategory.selectedItem.toString()
         val price = binding.etPrice.text.toString().trim()
 
-        if (selectedImageUri == null){
+        if (selectedImageUri == null) {
             Toast.makeText(this, "Please select a product image", Toast.LENGTH_SHORT).show()
-        }else if(title.isEmpty()){
+        } else if (title.isEmpty()) {
             binding.etTitle.error = "Product title is required"
-        }else if(price.isEmpty()){
+        } else if (price.isEmpty()) {
             binding.etPrice.error = "Product price is required"
-        }else if(category == "Select Category"){
-            Toast.makeText(this, "Please select a valid category", Toast.LENGTH_SHORT).show()
-        }else {
+        } else {
             saveProductToDatabase(title, price, category, selectedImageUri!!)
         }
     }
-    private fun saveProductToDatabase(title: String, price: String, category: String, imageUri: Uri){
 
+    private fun saveProductToDatabase(title: String, price: String, category: String, imageUri: Uri) {
+        val dbHelper = DatabaseHelper(this)
+        val newProduct = Product(title = title, price = price, category = category, imageUri = imageUri.toString())
+        dbHelper.addProduct(newProduct)
+        Toast.makeText(this, "Product added successfully", Toast.LENGTH_SHORT).show()
+        startActivity(Intent(this, AdminListProduct::class.java))
     }
-
 }
