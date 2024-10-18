@@ -14,6 +14,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             "$COL_USER_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "$COL_USER_NAME TEXT," +
             "$COL_USER_EMAIL TEXT UNIQUE," +
+            "COL_USER_NUMBER TEXT,"+
             "$COL_USER_PASSWORD TEXT," +
             "$COL_USER_CONFIRM TEXT)"
 
@@ -86,7 +87,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
         if (cursor?.count == 0) {
             val values = ContentValues()
-            values.put(COL_USER_NAME, "Admin Four")
             values.put(COL_USER_EMAIL, "admin4@gmail.com")
             val defaultPassword = "admin123"
             values.put(COL_USER_PASSWORD, BCrypt.hashpw(defaultPassword, BCrypt.gensalt()))
@@ -184,6 +184,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         private const val TABLE_USER = "tbl_user"
         private const val COL_USER_ID = "user_id"
         private const val COL_USER_NAME = "user_name"
+        private const val COL_USER_NUMBER = "user_number"
         private const val COL_USER_EMAIL = "user_email"
         private const val COL_USER_PASSWORD = "user_password"
         private const val COL_USER_CONFIRM = "user_confirm"
