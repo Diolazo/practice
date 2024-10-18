@@ -152,6 +152,7 @@
                     android:padding="8dp">
 
                     <ImageView
+                        android:id="@+id/first1"
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
                         android:src="@drawable/ic_cite"
@@ -184,6 +185,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/second2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -223,6 +225,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/third3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
@@ -263,6 +266,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/fourth4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"

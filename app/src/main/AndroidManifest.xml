@@ -33,6 +33,10 @@
         <activity
             android:name=".data.HomePageActivity"
             android:exported="false" />
+        <activity android:name=".data.ProductListActivity"
+            android:exported="false" />
+        <activity android:name=".data.CheckActivity"
+            android:exported="false" />
         <activity
             android:name=".data.ForgotActivity"
             android:exported="false" />

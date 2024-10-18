@@ -64,10 +64,4 @@ class HomeFragment : Fragment() {
 
         return view
     }
-
-    private fun Intent(java: Class<out FragmentActivity>): Intent {
-        TODO("Not yet implemented")
-    }
-
-
 }
