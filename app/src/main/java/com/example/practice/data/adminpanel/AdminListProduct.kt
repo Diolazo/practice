@@ -6,15 +6,15 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.practice.data.files.DatabaseHelper
-import androidx.appcompat.app.AlertDialog
 import com.example.practice.data.files.Product
 import com.example.practice.databinding.DesignAdminListProductBinding
+import androidx.appcompat.app.AlertDialog
 
 class AdminListProduct : AppCompatActivity() {
     private lateinit var binding: DesignAdminListProductBinding
     private lateinit var productAdapter: ProductAdapter
     private lateinit var databaseHelper: DatabaseHelper
-    private lateinit var productList: List<Product>
+    private var productList: List<Product> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,49 +22,41 @@ class AdminListProduct : AppCompatActivity() {
         setContentView(binding.root)
 
         databaseHelper = DatabaseHelper(this)
-        productList = databaseHelper.getAllProducts()
-
         setupRecyclerView()
+        loadProducts()
 
         binding.btnAdminBack2.setOnClickListener {
             startActivity(Intent(this, AdminDashboard::class.java))
         }
     }
 
+    private fun loadProducts() {
+        productList = databaseHelper.getAllProducts()
+        productAdapter.updateProducts(productList)
+    }
+
     private fun setupRecyclerView() {
         binding.recyclerViewProduct.layoutManager = LinearLayoutManager(this)
-        productAdapter = ProductAdapter(productList) { product ->
-            deleteProduct(product)
-        }
+        productAdapter = ProductAdapter(productList) { product -> onProductClick(product) }
         binding.recyclerViewProduct.adapter = productAdapter
+    }
+
+    private fun onProductClick(product: Product) {
+        AlertDialog.Builder(this)
+            .setTitle("Delete Product")
+            .setMessage("Are you sure you want to delete ${product.title}?")
+            .setPositiveButton("Yes") { _, _ -> deleteProduct(product) }
+            .setNegativeButton("No", null)
+            .show()
     }
 
     private fun deleteProduct(product: Product) {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Confirm Deletion")
-        builder.setMessage("Are you sure you want to delete ${product.title}?")
-
-        builder.setPositiveButton("Yes") { dialog, which ->
-            val result = databaseHelper.deleteProduct(product.id)
-            if (result > 0) {
-                Toast.makeText(this, "${product.title} deleted", Toast.LENGTH_SHORT).show()
-                refreshProductList()
-            } else {
-                Toast.makeText(this, "Failed to delete ${product.title}", Toast.LENGTH_SHORT).show()
-            }
+        val deletedRows = databaseHelper.deleteProduct(product.id)
+        if (deletedRows > 0) {
+            Toast.makeText(this, "Product deleted successfully", Toast.LENGTH_SHORT).show()
+            loadProducts()
+        } else {
+            Toast.makeText(this, "Failed to delete product", Toast.LENGTH_SHORT).show()
         }
-
-        builder.setNegativeButton("No") { dialog, which ->
-            dialog.dismiss()
-        }
-        builder.show()
-    }
-
-    private fun refreshProductList() {
-        productList = databaseHelper.getAllProducts()
-        productAdapter = ProductAdapter(productList) { product ->
-            deleteProduct(product)
-        }
-        binding.recyclerViewProduct.adapter = productAdapter
     }
 }

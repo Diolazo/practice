@@ -24,6 +24,10 @@ class AdminCreate : AppCompatActivity() {
     private lateinit var binding: DesignAdminCreateBinding
     private var selectedImageUri: Uri? = null
 
+    companion object {
+        private const val IMAGE_PICK_CODE = 100
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DesignAdminCreateBinding.inflate(layoutInflater)
@@ -42,7 +46,7 @@ class AdminCreate : AppCompatActivity() {
         }
 
         binding.btnAdminBack.setOnClickListener {
-            startActivity(Intent(this, AdminDashboard::class.java))
+            finish()
         }
     }
 
@@ -53,7 +57,7 @@ class AdminCreate : AppCompatActivity() {
                 arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 101)
         } else {
             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            startActivityForResult(intent, 100)
+            startActivityForResult(intent, IMAGE_PICK_CODE)
         }
     }
 
@@ -70,8 +74,8 @@ class AdminCreate : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 100 && resultCode == Activity.RESULT_OK) {
-            selectedImageUri = data?.data
+        if (requestCode == IMAGE_PICK_CODE && resultCode == Activity.RESULT_OK && data != null) {
+            selectedImageUri = data.data
             if (selectedImageUri != null) {
                 Glide.with(this)
                     .load(selectedImageUri)
@@ -103,6 +107,6 @@ class AdminCreate : AppCompatActivity() {
         val newProduct = Product(title = title, price = price, category = category, imageUri = imageUri.toString())
         dbHelper.addProduct(newProduct)
         Toast.makeText(this, "Product added successfully", Toast.LENGTH_SHORT).show()
-        startActivity(Intent(this, AdminListProduct::class.java))
+        finish()
     }
 }

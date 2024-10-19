@@ -7,14 +7,13 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 import org.mindrot.jbcrypt.BCrypt
 
-
 class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     private val CREATE_TABLE_USER = "CREATE TABLE $TABLE_USER (" +
             "$COL_USER_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "$COL_USER_NAME TEXT," +
             "$COL_USER_EMAIL TEXT UNIQUE," +
-            "COL_USER_NUMBER TEXT,"+
+            "$COL_USER_NUMBER TEXT," +
             "$COL_USER_PASSWORD TEXT," +
             "$COL_USER_CONFIRM TEXT)"
 
@@ -51,7 +50,9 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             put(COL_PRODUCT_IMAGE_URI, product.imageUri)
         }
 
-        return db.insert(TABLE_PRODUCT, null, values)
+        val id = db.insert(TABLE_PRODUCT, null, values)
+        Log.d("DatabaseHelper", "Product added: ID = $id, Title = ${product.title}")
+        return id
     }
 
     fun deleteProduct(productId: Int): Int {

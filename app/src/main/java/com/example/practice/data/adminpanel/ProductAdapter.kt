@@ -7,10 +7,9 @@ import com.bumptech.glide.Glide
 import com.example.practice.data.files.Product
 import com.example.practice.databinding.AdminListProductBinding
 
-class ProductAdapter(private var productList: List<Product>, private val onDeleteClick: (Product) -> Unit): RecyclerView.Adapter<ProductAdapter.ProductViewHolder>(){
+class ProductAdapter(private var productList: List<Product>, private val onDeleteClick: (Product) -> Unit) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
-    inner class ProductViewHolder(val binding: AdminListProductBinding):
-            RecyclerView.ViewHolder(binding.root)
+    inner class ProductViewHolder(val binding: AdminListProductBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val binding = AdminListProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -22,7 +21,7 @@ class ProductAdapter(private var productList: List<Product>, private val onDelet
 
         holder.binding.tvProductName.text = product.title
         holder.binding.tvProductPrice.text = "₱${product.price}"
-        holder.binding.tvProductCategory.text =product.category
+        holder.binding.tvProductCategory.text = product.category
         Glide.with(holder.binding.imgProduct.context)
             .load(product.imageUri)
             .into(holder.binding.imgProduct)
@@ -36,4 +35,8 @@ class ProductAdapter(private var productList: List<Product>, private val onDelet
         return productList.size
     }
 
+    fun updateProducts(newProductList: List<Product>) {
+        productList = newProductList
+        notifyDataSetChanged()
+    }
 }
