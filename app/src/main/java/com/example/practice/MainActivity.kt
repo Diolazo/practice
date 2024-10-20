@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        val delayMillis = 5000L
+        val delayMillis = 3000L
         android.os.Handler().postDelayed({
             startActivity(Intent(this, SignInActivity::class.java))
             finish()

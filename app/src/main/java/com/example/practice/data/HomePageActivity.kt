@@ -1,9 +1,12 @@
 package com.example.practice.data
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.provider.ContactsContract.Data
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.practice.R
@@ -14,17 +17,29 @@ import com.example.practice.data.course.CeaProducts
 import com.example.practice.data.course.CelaProducts
 import com.example.practice.data.course.CiteProducts
 import com.example.practice.data.course.CmaProducts
+import com.example.practice.data.files.DatabaseHelper
 import com.example.practice.databinding.DesignHomePageActivityBinding
 
 class HomePageActivity : AppCompatActivity() {
 
     private lateinit var binding: DesignHomePageActivityBinding
+    private lateinit var dbHelper: DatabaseHelper
     private var doubleBackToExitPressOnce = false
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DesignHomePageActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        dbHelper = DatabaseHelper(this)
+        sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+
+        val userEmail = sharedPreferences.getString("userEmail", null)
+        if (userEmail != null){
+            val userName = dbHelper.getUserNameByEmail(userEmail)
+            binding.tvUser.text = userName?: "Your Name"
+        }
 
         binding.btnCite.setOnClickListener {
             startActivity(Intent(this, CiteProducts::class.java))
@@ -54,7 +69,11 @@ class HomePageActivity : AppCompatActivity() {
         binding.BottomNavMenu.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.home -> {
-                    startActivity(Intent(this, HomePageActivity::class.java))
+                    if (this::class.java != HomePageActivity::class.java) {
+                        startActivity(Intent(this, HomePageActivity::class.java))
+                    } else {
+
+                    }
                     true
                 }
                 R.id.shoppingcart -> {
