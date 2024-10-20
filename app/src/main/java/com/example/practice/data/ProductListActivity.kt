@@ -12,13 +12,6 @@ class ProductListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        val binding = ProductListBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        binding.product1.setOnClickListener {
-            val intent = Intent(this, CheckActivity::class.java)
-            startActivity(intent)
-        }
     }
 
 }

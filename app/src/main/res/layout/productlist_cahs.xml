@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".data.ProductListActivity">
+    tools:context=".data.ProductListCAHS">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -92,7 +92,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginBottom="24dp"
                 android:fontFamily="sans-serif-medium"
-                android:text="CITE"
+                android:text="CAHS"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="50sp"
@@ -103,7 +103,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/product_CITE"
+            android:id="@+id/product_CAHS"
             android:layout_width="409dp"
             android:layout_height="549dp"
             android:layout_marginStart="1dp"

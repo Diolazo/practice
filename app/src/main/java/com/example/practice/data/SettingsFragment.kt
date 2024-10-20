@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.practice.data.files.DatabaseHelper
 import com.example.practice.databinding.FragmentSettingsBinding
 
 class SettingsFragment : Fragment() {
+    private lateinit var databaseHelper: DatabaseHelper
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
 
@@ -23,6 +25,7 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         binding.btnSetLogOut.setOnClickListener {
             logoutUser()
