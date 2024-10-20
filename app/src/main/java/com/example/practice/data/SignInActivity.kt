@@ -1,5 +1,6 @@
 package com.example.practice.data
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -65,6 +66,11 @@ class SignInActivity : AppCompatActivity() {
 
                     withContext(Dispatchers.Main) {
                         if (isSuccess) {
+                            val sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+                            val editor = sharedPreferences.edit()
+                            editor.putString("userEmail", email)
+                            editor.apply()
+
                             if (email == "admin4@gmail.com") {
                                 startActivity(Intent(this@SignInActivity, AdminDashboard::class.java))
                             } else {

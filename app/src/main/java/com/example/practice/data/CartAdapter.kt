@@ -6,16 +6,16 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import androidx.recyclerview.widget.RecyclerView
 import com.example.practice.R
-import com.example.practice.data.files.ShoppingCartItem
+import com.example.practice.data.files.Cart
 
-class ShoppingCartAdapter(private val items: List<ShoppingCartItem>) : RecyclerView.Adapter<ShoppingCartAdapter.ViewHolder>() {
+class CartAdapter(private val items: List<Cart>) : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val checkBox: CheckBox = itemView.findViewById(R.id.checkBox)
 //        val itemName: TextView = itemView.findViewById(R.id.itemName)
 //        val itemPrice: TextView = itemView.findViewById(R.id.itemPrice)
 
-        fun bind(item: ShoppingCartItem) {
+        fun bind(item: Cart) {
             checkBox.isChecked = item.isChecked
 //            itemName.text = item.name
 //            itemPrice.text = "$${item.price}"
