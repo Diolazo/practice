@@ -9,7 +9,7 @@
         android:id="@+id/constraintLayout2"
         android:layout_width="415dp"
         android:layout_height="135dp"
-        android:background="@drawable/up_page"
+        android:background="@drawable/custom_home_page"
         tools:ignore="MissingConstraints">
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -23,9 +23,10 @@
         android:text="Thank you for your purchase on our application. Please wait for our call so you can receive your order."
         android:textSize="40dp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="47dp" />
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:layout_width="180dp"
@@ -35,7 +36,6 @@
         android:textColorHint="@color/white"
         android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.554"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         tools:ignore="MissingConstraints" />

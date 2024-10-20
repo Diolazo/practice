@@ -10,7 +10,7 @@
         android:id="@+id/constraintLayout2"
         android:layout_width="415dp"
         android:layout_height="135dp"
-        android:background="@drawable/up_page"
+        android:background="@drawable/custom_home_page"
         tools:ignore="MissingConstraints">
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -41,16 +41,5 @@
         app:layout_constraintTop_toBottomOf="@+id/input_email_login"
         tools:layout_editor_absoluteX="146dp"
         tools:ignore="MissingConstraints" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout3"
-        android:layout_width="415dp"
-        android:layout_height="135dp"
-        android:background="@drawable/up_page2"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="-2dp"
-        tools:layout_editor_absoluteY="598dp">
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

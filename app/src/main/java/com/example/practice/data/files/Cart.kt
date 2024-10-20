@@ -1,6 +1,6 @@
 package com.example.practice.data.files
 
-data class ShoppingCartItem(
+data class Cart(
 //    val id: Int,
     val name: String,
 //    val price: Double,
