@@ -1,4 +1,4 @@
-package com.example.practice.data
+package com.example.practice.data.files
 
 data class ShoppingCartItem(
 //    val id: Int,

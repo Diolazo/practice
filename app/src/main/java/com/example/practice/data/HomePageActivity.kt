@@ -1,89 +1,73 @@
 package com.example.practice.data
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentTransaction
 import com.example.practice.R
-import com.example.practice.databinding.BottomNavigationBinding
+import com.example.practice.data.course.CahsProducts
+import com.example.practice.data.course.CasProducts
+import com.example.practice.data.course.CcjseProducts
+import com.example.practice.data.course.CeaProducts
+import com.example.practice.data.course.CelaProducts
+import com.example.practice.data.course.CiteProducts
+import com.example.practice.data.course.CmaProducts
 import com.example.practice.databinding.DesignHomePageActivityBinding
-import com.example.practice.databinding.DesignSignInActivityBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomePageActivity : AppCompatActivity() {
 
-    private lateinit var binding: BottomNavigationBinding
-    private lateinit var homeFragment: HomeFragment
-    private lateinit var shoppingCartFragment: ShoppingCartFragment
-    private lateinit var settingsFragment: SettingsFragment
+    private lateinit var binding: DesignHomePageActivityBinding
     private var doubleBackToExitPressOnce = false
 
-
-
-    @SuppressLint("MissingInflatedId", "WrongViewCast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = BottomNavigationBinding.inflate(layoutInflater)
+        binding = DesignHomePageActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val bottomNavMenu = binding.BottomNavMenu
-        val frameLayout = binding.frameLayout
+        binding.btnCite.setOnClickListener {
+            startActivity(Intent(this, CiteProducts::class.java))
+        }
+        binding.btnCea.setOnClickListener {
+            startActivity(Intent(this, CeaProducts::class.java))
+        }
+        binding.btnCma.setOnClickListener {
+            startActivity(Intent(this, CmaProducts::class.java))
+        }
+        binding.btnCela.setOnClickListener {
+            startActivity(Intent(this, CelaProducts::class.java))
+        }
+        binding.btnCahs.setOnClickListener {
+            startActivity(Intent(this, CahsProducts::class.java))
+        }
+        binding.btnCcjse.setOnClickListener {
+            startActivity(Intent(this, CcjseProducts::class.java))
+        }
+        binding.btnCas.setOnClickListener {
+            startActivity(Intent(this, CasProducts::class.java))
+        }
 
-        homeFragment = HomeFragment()
-        shoppingCartFragment = ShoppingCartFragment()
-        settingsFragment = SettingsFragment()
 
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.frameLayout, homeFragment)
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            .commit()
 
-        bottomNavMenu.setOnItemSelectedListener { item ->
+
+        binding.BottomNavMenu.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.home -> {
-                    supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.frameLayout, homeFragment)
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .commit()
+                    startActivity(Intent(this, HomePageActivity::class.java))
+                    true
                 }
                 R.id.shoppingcart -> {
-                    supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.frameLayout, shoppingCartFragment)
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .commit()
+                    startActivity(Intent(this, CartActivity::class.java))
+                    true
                 }
                 R.id.settings -> {
-                    supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.frameLayout, settingsFragment)
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .commit()
-                }
+                    startActivity(Intent(this, SettingsActivity::class.java))
+                    true
+                }else ->false
             }
-            true
         }
     }
-
-
-
-
-
-
 
     override fun onBackPressed() {
         if (doubleBackToExitPressOnce) {

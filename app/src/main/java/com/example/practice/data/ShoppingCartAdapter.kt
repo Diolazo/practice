@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.practice.R
+import com.example.practice.data.files.ShoppingCartItem
 
 class ShoppingCartAdapter(private val items: List<ShoppingCartItem>) : RecyclerView.Adapter<ShoppingCartAdapter.ViewHolder>() {
 
