@@ -18,18 +18,18 @@ abstract class CheckActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        // Inflate the binding layout
+
         binding = CheckoutItemBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Handle window insets for edge-to-edge support
+
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        // Set up click listeners
+
         binding.goBack.setOnClickListener {
             onBackPressed() // Go back to the previous activity
         }
