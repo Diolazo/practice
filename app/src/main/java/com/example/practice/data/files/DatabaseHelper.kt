@@ -125,6 +125,24 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return db.delete(TABLE_USER, "$COL_USER_ID = ?", arrayOf(userId.toString()))
     }
 
+    fun getUserNameByEmail(email: String): String? {
+        val db = this.readableDatabase
+        val cursor = db.query(
+            TABLE_USER, arrayOf(COL_USER_NAME),
+            "$COL_USER_EMAIL = ?", arrayOf(email), null, null, null
+        )
+
+        return if (cursor.moveToFirst()) {
+            val userName = cursor.getString(cursor.getColumnIndexOrThrow(COL_USER_NAME))
+            cursor.close()
+            userName
+        } else {
+            cursor.close()
+            null
+        }
+    }
+
+
     fun getAllUsers(): List<Users> {
         val userList = mutableListOf<Users>()
         val db = this.readableDatabase
