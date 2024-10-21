@@ -43,7 +43,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cartRecyclerView"
-        android:layout_width="409dp"
+        android:layout_width="350dp"
         android:layout_height="609dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="8dp"

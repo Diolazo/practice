@@ -71,6 +71,8 @@
         <activity
             android:name=".data.CheckActivity"
             android:exported="false" />
+        <activity android:name=".data.course.BuyNowActivity"/>
+        <activity android:name=".data.course.ConfirmationActivity" />
         <activity
             android:name=".data.ForgotActivity"
             android:exported="false" />

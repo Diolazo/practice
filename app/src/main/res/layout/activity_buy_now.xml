@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="BuyNowActivity">
+    android:background="@color/white"
+    tools:context=".data.course.BuyNowActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
@@ -24,23 +25,26 @@
         android:drawablePadding="10dp"
         android:gravity="center_vertical"
         android:hint="Number"
-        android:textColorHint="@color/black"
         android:inputType="number"
         android:paddingStart="20dp"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
-        tools:layout_editor_absoluteX="57dp"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/btn_confirm"
         android:layout_width="120dp"
         android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="@color/primaryColor"
         android:hint="Confirm"
         android:textColorHint="@color/white"
-        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/input_email_login"
-        tools:layout_editor_absoluteX="146dp"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

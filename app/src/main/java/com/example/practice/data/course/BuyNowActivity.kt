@@ -1,3 +1,6 @@
+package com.example.practice.data.course
+
+import DatabaseHelper
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle

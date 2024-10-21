@@ -1,12 +1,14 @@
 package com.example.practice.data.course
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.practice.data.CartActivity
+import com.example.practice.data.files.DatabaseHelper
 import com.example.practice.data.files.Product
 import com.example.practice.databinding.DesignProductBinding
 
@@ -22,7 +24,15 @@ class DepartmentAdapter(private val context: Context, private val productList: L
                 .into(binding.imgProduct)
 
             binding.btnBuy.setOnClickListener {
-                Toast.makeText(context, "Bought ${product.title}!", Toast.LENGTH_SHORT).show()
+                val intent = Intent(context, BuyNowActivity::class.java)
+                context.startActivity(intent)
+            }
+            binding.btnCart.setOnClickListener {
+                val dbHelper = DatabaseHelper(context)
+                dbHelper.addToCart(product)
+
+                val intent = Intent(context, CartActivity::class.java)
+                context.startActivity(intent)
             }
         }
     }

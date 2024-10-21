@@ -4,13 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ConfirmationActivity">
+    android:background="@color/white"
+    tools:context=".data.course.ConfirmationActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
-        android:layout_width="415dp"
+        android:layout_width="match_parent"
         android:layout_height="135dp"
         android:background="@drawable/custom_home_page"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -34,6 +38,7 @@
         android:layout_width="180dp"
         android:layout_height="65dp"
         android:layout_marginTop="85dp"
+        android:backgroundTint="@color/primaryColor"
         android:hint="Back to Home"
         android:textColorHint="@color/white"
         android:textSize="18dp"

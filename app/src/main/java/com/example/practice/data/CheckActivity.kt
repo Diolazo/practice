@@ -1,6 +1,6 @@
 package com.example.practice.data
 
-import BuyNowActivity
+import com.example.practice.data.course.BuyNowActivity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

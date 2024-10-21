@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".data.SettingsActivity">
+    tools:context=".data.SettingsActivity"
+    android:background="@color/white">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
