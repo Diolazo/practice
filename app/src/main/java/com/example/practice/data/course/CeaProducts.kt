@@ -6,10 +6,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.practice.R
+import com.example.practice.databinding.CeaProductsBinding
 
 class CeaProducts : AppCompatActivity() {
+    private lateinit var binding: CeaProductsBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.cea_products)
+        binding = CeaProductsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 }
