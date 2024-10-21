@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.practice.R
 import com.example.practice.data.files.DatabaseHelper
 import com.example.practice.data.files.Product
-import com.example.practice.databinding.CahsProductsBinding
 import com.example.practice.databinding.CiteProductsBinding
 
 class CahsProducts : AppCompatActivity() {
