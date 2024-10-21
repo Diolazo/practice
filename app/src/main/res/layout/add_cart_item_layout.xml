@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="130dp"
+    android:layout_height="150dp"
     android:background="@drawable/custom_admin_list"
     android:padding="16dp">
 
@@ -19,8 +19,8 @@
 
     <ImageView
         android:id="@+id/ivProductImage"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:contentDescription="Product Image"
@@ -39,7 +39,7 @@
         android:paddingEnd="16dp"
         android:text="Product Name"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/ivProductImage"
@@ -47,23 +47,25 @@
 
     <Button
         android:id="@+id/btnBuy"
-        android:layout_width="80dp"
+        android:layout_width="90dp"
         android:layout_height="48dp"
+        android:layout_marginStart="80dp"
         android:backgroundTint="@color/primaryColor"
         android:text="Buy Now"
         android:textColor="@color/white"
-        android:textSize="12sp"
+        android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvProductName"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/ivProductImage"
+        app:layout_constraintTop_toBottomOf="@+id/tvProductName"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/btnCartDelete"
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnBuy"
-        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_delete" />
 </androidx.constraintlayout.widget.ConstraintLayout>
