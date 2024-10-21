@@ -1,43 +1,69 @@
-package com.example.practice.data
+package com.example.practice.ui
 
+import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
+import androidx.appcompat.app.AlertDialog
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.practice.R
+import com.bumptech.glide.Glide
 import com.example.practice.data.files.Cart
+import com.example.practice.databinding.AddCartItemLayoutBinding
 
-class CartAdapter(private val items: List<Cart>) : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
+class CartAdapter(
+    private var cartItems: List<Cart>,
+    private val onDeleteClick: (Int) -> Unit,
+    private val onBuyNowClick: (Cart) -> Unit
+) : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val checkBox: CheckBox = itemView.findViewById(R.id.checkBox)
-//        val itemName: TextView = itemView.findViewById(R.id.itemName)
-//        val itemPrice: TextView = itemView.findViewById(R.id.itemPrice)
+    inner class CartViewHolder(private val binding: AddCartItemLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(cart: Cart) {
+            binding.tvProductName.text = cart.productName
+            binding.cbSelectProduct.isChecked = cart.isSelected
 
-        fun bind(item: Cart) {
-            checkBox.isChecked = item.isChecked
-//            itemName.text = item.name
-//            itemPrice.text = "$${item.price}"
+            Glide.with(binding.root.context)
+                .load(cart.productImageUri)
+                .into(binding.ivProductImage)
+
+            binding.btnBuy.setOnClickListener {
+                onBuyNowClick(cart)
+            }
+
+            binding.btnCartDelete.setOnClickListener {
+                showDeleteConfirmationDialog(binding.root.context, cart.productId)
+            }
         }
+        private fun showDeleteConfirmationDialog(context: Context, productId: Int) {
+            AlertDialog.Builder(context).apply {
+                setTitle("Delete Item")
+                setMessage("Are you sure you want to delete this item?")
+                setPositiveButton("Yes") { _, _ ->
+                    onDeleteClick(productId)
+                    Toast.makeText(context, "Item deleted from cart.", Toast.LENGTH_SHORT).show()
+                }
+                setNegativeButton("No", null)
+                show()
+            }
+        }
+
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.add_cart_item_layout, parent, false)
-        return ViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
+        val binding = AddCartItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return CartViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = items[position]
-        holder.bind(item)
-
-        holder.checkBox.setOnCheckedChangeListener { _, isChecked ->
-//            item.isChecked = isChecked
-        }
+    override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
+        val cartItem = cartItems[position]
+        holder.bind(cartItem)
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        return cartItems.size
+    }
+
+    fun updateCartItems(newCartItems: List<Cart>) {
+        cartItems = newCartItems
+        notifyDataSetChanged()
     }
 }

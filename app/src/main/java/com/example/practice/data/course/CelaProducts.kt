@@ -13,26 +13,26 @@ import com.example.practice.databinding.CelaProductsBinding
 import com.example.practice.databinding.CiteProductsBinding
 
 class CelaProducts : AppCompatActivity() {
-    private lateinit var binding: CiteProductsBinding
+    private lateinit var binding: CelaProductsBinding
     private lateinit var departmentAdapter: DepartmentAdapter
     private lateinit var productList: List<Product>
     private lateinit var dbHelper: DatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = CiteProductsBinding.inflate(layoutInflater)
+        binding = CelaProductsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         dbHelper = DatabaseHelper(this)
 
-        binding.backCite.setOnClickListener {
+        binding.backCela.setOnClickListener {
             finish()
         }
 
-        productList = dbHelper.getAllProducts().filter { it.category == "CITE" }
+        productList = dbHelper.getAllProducts().filter { it.category == "CELA" }
 
         departmentAdapter = DepartmentAdapter(this, productList)
-        binding.productCITE.apply {
+        binding.productCELA.apply {
             layoutManager = LinearLayoutManager(this@CelaProducts)
             adapter = departmentAdapter
         }

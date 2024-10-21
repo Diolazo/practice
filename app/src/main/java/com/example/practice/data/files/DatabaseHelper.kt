@@ -24,12 +24,21 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             "$COL_PRODUCT_CATEGORY TEXT," +
             "$COL_PRODUCT_IMAGE_URI TEXT)"
 
+    private val CREATE_TABLE_CART = "CREATE TABLE $TABLE_CART (" +
+            "$COL_CART_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "$COL_CART_PRODUCT_ID INTEGER, " +
+            "$COL_CART_PRODUCT_NAME TEXT, " +
+            "$COL_CART_PRODUCT_IMAGE_URI TEXT, " +
+            "$COL_CART_IS_SELECTED INTEGER DEFAULT 0)"
+
     private val DROP_TABLE_USER = "DROP TABLE IF EXISTS $TABLE_USER"
     private val DROP_TABLE_PRODUCT = "DROP TABLE IF EXISTS $TABLE_PRODUCT"
+    private val DROP_TABLE_CART = "DROP TABLE IF EXISTS $TABLE_CART"
 
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(CREATE_TABLE_USER)
         db.execSQL(CREATE_TABLE_PRODUCT)
+        db.execSQL(CREATE_TABLE_CART)
         insertDefaultAdmin(db)
         Log.d("DatabaseHelper", "Tables created: $TABLE_USER, $TABLE_PRODUCT")
     }
@@ -37,6 +46,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         db.execSQL(DROP_TABLE_USER)
         db.execSQL(DROP_TABLE_PRODUCT)
+        db.execSQL(DROP_TABLE_CART)
         onCreate(db)
         Log.d("DatabaseHelper", "Database upgraded from version $oldVersion to $newVersion")
     }
@@ -196,8 +206,48 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return cursorCount > 0
     }
 
+    fun addCartItem(cartItem: Cart): Long {
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put(COL_CART_PRODUCT_ID, cartItem.productId)
+            put(COL_CART_PRODUCT_NAME, cartItem.productName)
+            put(COL_CART_PRODUCT_IMAGE_URI, cartItem.productImageUri)
+        }
+
+        val id = db.insert(TABLE_CART, null, values)
+        Log.d("DatabaseHelper", "Cart item added: ID = $id, Product Name = ${cartItem.productName}")
+        return id
+    }
+
+    fun getCartItems(): List<Cart> {
+        val cartList = mutableListOf<Cart>()
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM $TABLE_CART", null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                val productId = cursor.getInt(cursor.getColumnIndexOrThrow(COL_CART_PRODUCT_ID))
+                val productName = cursor.getString(cursor.getColumnIndexOrThrow(COL_CART_PRODUCT_NAME))
+                val productImageUri = cursor.getString(cursor.getColumnIndexOrThrow(COL_CART_PRODUCT_IMAGE_URI))
+
+                val cartItem = Cart(productId, productName, productImageUri)
+                cartList.add(cartItem)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+
+        Log.d("Database", "Fetched cart items: $cartList")
+        return cartList
+    }
+
+    fun deleteCartItem(productId: Int): Int {
+        val db = this.writableDatabase
+        return db.delete(TABLE_CART, "$COL_CART_PRODUCT_ID = ?", arrayOf(productId.toString()))
+    }
+
+
     companion object {
-        private const val DATABASE_VERSION = 2
+        private const val DATABASE_VERSION = 3
         private const val DATABASE_NAME = "user.db"
         private const val TABLE_USER = "tbl_user"
         private const val COL_USER_ID = "user_id"
@@ -213,5 +263,12 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         private const val COL_PRODUCT_PRICE = "product_price"
         private const val COL_PRODUCT_CATEGORY = "product_category"
         private const val COL_PRODUCT_IMAGE_URI = "product_image_uri"
+
+        private const val TABLE_CART = "tbl_cart"
+        private const val COL_CART_ID = "cart_id"
+        private const val COL_CART_PRODUCT_ID = "cart_product_id"
+        private const val COL_CART_PRODUCT_NAME = "cart_product_name"
+        private const val COL_CART_PRODUCT_IMAGE_URI = "cart_product_image_uri"
+        private const val COL_CART_IS_SELECTED = "cart_is_selected"
     }
 }

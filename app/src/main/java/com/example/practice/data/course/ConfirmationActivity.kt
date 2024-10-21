@@ -6,15 +6,19 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.practice.R
 import com.example.practice.data.HomePageActivity
+import com.example.practice.databinding.ActivityConfirmationBinding
 
 class ConfirmationActivity : AppCompatActivity() {
-
+    private lateinit var binding: ActivityConfirmationBinding
     private lateinit var btnBackHome: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_confirmation)
-
+        binding = ActivityConfirmationBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        binding.btnConfrimBack.setOnClickListener {
+            finish()
+        }
         btnBackHome = findViewById(R.id.back_home)
 
         btnBackHome.setOnClickListener {

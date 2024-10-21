@@ -9,9 +9,10 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.practice.R
+import com.example.practice.databinding.ActivityBuyNowBinding
 
 class BuyNowActivity : AppCompatActivity() {
-
+    private lateinit var binding: ActivityBuyNowBinding
     private lateinit var editTextNumber: EditText
     private lateinit var btnConfirm: Button
     private lateinit var databaseHelper: DatabaseHelper
@@ -19,11 +20,16 @@ class BuyNowActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_buy_now)
+        binding = ActivityBuyNowBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         editTextNumber = findViewById(R.id.input_email_login)
         btnConfirm = findViewById(R.id.btn_confirm)
         databaseHelper = DatabaseHelper(this)
+
+        binding.btnBuyBack.setOnClickListener {
+            finish()
+        }
 
         btnConfirm.setOnClickListener {
             val number = editTextNumber.text.toString()

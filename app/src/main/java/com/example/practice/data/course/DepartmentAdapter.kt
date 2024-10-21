@@ -5,9 +5,11 @@ import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.practice.data.CartActivity
+import com.example.practice.data.files.Cart
 import com.example.practice.data.files.DatabaseHelper
 import com.example.practice.data.files.Product
 import com.example.practice.databinding.DesignProductBinding
@@ -28,11 +30,19 @@ class DepartmentAdapter(private val context: Context, private val productList: L
                 context.startActivity(intent)
             }
             binding.btnCart.setOnClickListener {
-                val dbHelper = DatabaseHelper(context)
-
-                val intent = Intent(context, CartActivity::class.java)
-                context.startActivity(intent)
+                addToCart(product)
             }
+        }
+    }
+    private fun addToCart(product: Product) {
+        val dbHelper = DatabaseHelper(context)
+        val cartItem = Cart(product.id, product.title, product.imageUri)
+
+        val id = dbHelper.addCartItem(cartItem)
+        if (id != -1L) {
+            Toast.makeText(context, "${product.title} added to cart", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(context, "Failed to add to cart", Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -51,13 +51,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
-                app:cardCornerRadius="150dp">
+                app:cardCornerRadius="150dp"
+                android:background="@color/white">
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_person2" />
+                    android:src="@drawable/ic_person2"
+                    android:background="@color/white"/>
 
             </androidx.cardview.widget.CardView>
         </androidx.cardview.widget.CardView>
@@ -81,12 +83,12 @@
     <ImageView
         android:id="@+id/btn_cite"
         android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_height="130dp"
         android:layout_marginStart="60dp"
         android:layout_marginTop="4dp"
+        android:src="@drawable/ic_cite"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/no_value9"
-        android:src="@drawable/ic_cite" />
+        app:layout_constraintTop_toBottomOf="@+id/no_value9" />
 
     <ImageView
         android:id="@+id/btn_cea"
@@ -94,61 +96,57 @@
         android:layout_height="130dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="60dp"
+        android:src="@drawable/ic_cea"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/no_value9"
-        android:src="@drawable/ic_cea" />
+        app:layout_constraintTop_toBottomOf="@+id/no_value9" />
 
     <ImageView
         android:id="@+id/btn_cma"
         android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_height="130dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_cma"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_cite"
-        android:src="@drawable/ic_cma" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_cite" />
 
     <ImageView
         android:id="@+id/btn_cela"
         android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="130dp"
         android:layout_marginEnd="60dp"
+        android:src="@drawable/ic_cela"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_cea"
-        android:src="@drawable/ic_cela" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_cea" />
 
     <ImageView
         android:id="@+id/btn_cahs"
         android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_height="130dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_cahs"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_cma"
-        android:src="@drawable/ic_cahs" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_cma" />
 
     <ImageView
         android:id="@+id/btn_ccjse"
         android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="130dp"
         android:layout_marginEnd="60dp"
+        android:src="@drawable/ic_ccjse"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_cela"
-        android:src="@drawable/ic_ccjse" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_cela" />
 
     <ImageView
         android:id="@+id/btn_cas"
         android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_height="130dp"
         android:layout_marginStart="60dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="4dp"
+        android:src="@drawable/ic_cas"
         app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_cahs"
-        android:src="@drawable/ic_cas" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_cahs" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinatorLayout"

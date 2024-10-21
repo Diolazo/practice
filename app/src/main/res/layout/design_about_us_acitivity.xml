@@ -43,11 +43,13 @@
 
     <TextView
         android:id="@+id/no_value_30"
-        android:layout_width="350dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:gravity="center"
         android:text="The UPang Bazaar App is a dedicated marketplace platform developed for the students of PHINMA University of Pangasinan. Its primary purpose is to create a convenient and secure space for students to buy, sell, and trade essential items such as textbooks, uniforms, and various services. By offering affordable alternatives, the app helps students manage the rising costs associated with their education."
-        android:textSize="14sp"
+        android:textColor="@color/primaryColor"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

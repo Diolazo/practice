@@ -13,26 +13,26 @@ import com.example.practice.databinding.CcjseProductsBinding
 import com.example.practice.databinding.CiteProductsBinding
 
 class CcjseProducts : AppCompatActivity() {
-    private lateinit var binding: CiteProductsBinding
+    private lateinit var binding: CcjseProductsBinding
     private lateinit var departmentAdapter: DepartmentAdapter
     private lateinit var productList: List<Product>
     private lateinit var dbHelper: DatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = CiteProductsBinding.inflate(layoutInflater)
+        binding = CcjseProductsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         dbHelper = DatabaseHelper(this)
 
-        binding.backCite.setOnClickListener {
+        binding.backCcje.setOnClickListener {
             finish()
         }
 
-        productList = dbHelper.getAllProducts().filter { it.category == "CITE" }
+        productList = dbHelper.getAllProducts().filter { it.category == "CCJSE" }
 
         departmentAdapter = DepartmentAdapter(this, productList)
-        binding.productCITE.apply {
+        binding.productCCJE.apply {
             layoutManager = LinearLayoutManager(this@CcjseProducts)
             adapter = departmentAdapter
         }

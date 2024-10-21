@@ -51,7 +51,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_admin" />
+                    android:src="@drawable/ic_admin"
+                    android:background="@color/white"/>
 
             </androidx.cardview.widget.CardView>
         </androidx.cardview.widget.CardView>

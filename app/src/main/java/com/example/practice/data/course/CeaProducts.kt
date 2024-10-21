@@ -28,7 +28,7 @@ class CeaProducts : AppCompatActivity() {
             finish()
         }
 
-        productList = dbHelper.getAllProducts().filter { it.category == "CITE" }
+        productList = dbHelper.getAllProducts().filter { it.category == "CEA" }
 
         departmentAdapter = DepartmentAdapter(this, productList)
         binding.productCEA.apply {

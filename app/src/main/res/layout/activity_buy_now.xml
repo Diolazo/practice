@@ -9,42 +9,71 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
-        android:layout_width="415dp"
-        android:layout_height="135dp"
+        android:layout_width="match_parent"
+        android:layout_height="550dp"
         android:background="@drawable/custom_home_page"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
 
+        <EditText
+            android:id="@+id/input_email_login"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/custom_black"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:hint="Number"
+            android:inputType="number"
+            android:paddingStart="20dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/btn_confirm"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/no_value41"
+            app:layout_constraintVertical_bias="0.698"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/btn_confirm"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="112dp"
+            android:backgroundTint="@color/wheat"
+            android:hint="Confirm"
+            android:textColorHint="@color/primaryColor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <ImageView
+            android:id="@+id/btnBuyBack"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_arrow_back" />
+
+        <TextView
+            android:id="@+id/no_value41"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Please enter your phone number.Please enter your phone number."
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="105dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <EditText
-        android:id="@+id/input_email_login"
-        android:layout_width="300dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="150dp"
-        android:background="@drawable/custom_black"
-        android:drawablePadding="10dp"
-        android:gravity="center_vertical"
-        android:hint="Number"
-        android:inputType="number"
-        android:paddingStart="20dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/btn_confirm"
-        android:layout_width="120dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="40dp"
-        android:backgroundTint="@color/primaryColor"
-        android:hint="Confirm"
-        android:textColorHint="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_email_login"
-        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
