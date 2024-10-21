@@ -26,22 +26,26 @@ class AdminListUser : AppCompatActivity() {
     private lateinit var binding: DesignAdminListUserBinding
     private lateinit var userAdapter: UserAdapter
     private lateinit var databaseHelper: DatabaseHelper
-    private lateinit var userList: List<Users>
+    private var userList: List<Users> = emptyList() // Initialize as empty list
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DesignAdminListUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Initialize the DatabaseHelper
         databaseHelper = DatabaseHelper(this)
-        userList = databaseHelper.getAllUsers()
-        Log.d("AdminListUser", "User list size: ${userList.size}")
+
+        // Refresh the user list and setup RecyclerView
+        refreshUserList()
         setupRecyclerView()
 
+        // Button to go back to Admin Dashboard
         binding.btnAdminBack3.setOnClickListener {
             startActivity(Intent(this, AdminDashboard::class.java))
         }
 
+        // Button to export user data to CSV
         binding.btnExport.setOnClickListener {
             if (ContextCompat.checkSelfPermission(
                     this,
@@ -61,9 +65,7 @@ class AdminListUser : AppCompatActivity() {
 
     private fun setupRecyclerView() {
         binding.recyclerViewUser.layoutManager = LinearLayoutManager(this)
-        userAdapter = UserAdapter(userList) { user ->
-            deleteUser(user)
-        }
+        userAdapter = UserAdapter(userList) { user -> deleteUser(user) }
         binding.recyclerViewUser.adapter = userAdapter
     }
 
@@ -81,23 +83,21 @@ class AdminListUser : AppCompatActivity() {
                 Toast.makeText(this, "Failed to delete ${user.name}", Toast.LENGTH_SHORT).show()
             }
         }
-        builder.setNegativeButton("No") { dialog, which ->
-            dialog.dismiss()
-        }
+        builder.setNegativeButton("No") { dialog, which -> dialog.dismiss() }
         builder.show()
     }
 
-    private fun refreshUserList(){
-        userList = databaseHelper.getAllUsers()
-        userAdapter = UserAdapter(userList){user ->
-            deleteUser(user)
+    private fun refreshUserList() {
+        try {
+            userList = databaseHelper.getAllUsers()
+        } catch (e: Exception) {
+            Log.e("AdminListUser", "Error fetching user list: ${e.message}")
+            Toast.makeText(this, "Error fetching user list", Toast.LENGTH_SHORT).show()
         }
-        binding.recyclerViewUser.adapter = userAdapter
     }
 
     private fun exportToCSV() {
         val fileName = "UpangBazaarAccount.csv"
-        val filePath: String
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             val contentValues = ContentValues().apply {

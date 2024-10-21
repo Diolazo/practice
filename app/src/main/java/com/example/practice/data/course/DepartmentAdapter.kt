@@ -29,7 +29,6 @@ class DepartmentAdapter(private val context: Context, private val productList: L
             }
             binding.btnCart.setOnClickListener {
                 val dbHelper = DatabaseHelper(context)
-                dbHelper.addToCart(product)
 
                 val intent = Intent(context, CartActivity::class.java)
                 context.startActivity(intent)
