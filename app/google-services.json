@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "142111724857",
+    "project_id": "upang-bazaar",
+    "storage_bucket": "upang-bazaar.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:142111724857:android:e3402e554eb5152eba04e8",
+        "android_client_info": {
+          "package_name": "com.example.practice"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFXfVs1fm1-yIShQ_TPaxZhO_edeuoCoc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
